@@ -1,83 +1,204 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pertanyaan untukmu</title>
-    <style>
-        /* Global styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #2C2F36; /* Dark background */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #E0E0E0; /* Light gray text */
-        }
-        
-        .container {
-            background: linear-gradient(135deg, #3A3D42, #212529); /* Dark gradient background */
-            border-radius: 12px;
-            padding: 20px 25px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            width: 90%;
-            max-width: 400px;
-            font-size: 16px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio | Portfolio</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #1e1e1e;
+      --text-color: #f0f0f0;
+      --accent-color: #00bcd4;
+      --card-bg: #2c2c2c;
+    }
 
-        h1 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #F1F1F1; /* Light gray for the header */
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        button {
-            background-color: #4A4A4A; /* Darker gray for buttons */
-            color: #F1F1F1; /* Light text color */
-            border: 2px solid #5A5A5A;
-            padding: 10px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      overflow-x: hidden;
+    }
 
-        /* Hover effects */
-        button:hover {
-            background-color: #6D6D6D; /* Lighter gray on hover */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px); /* Slight lift effect */
-        }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #121212;
+      animation: fadeInDown 1s ease-out;
+    }
 
-        button:active {
-            transform: translateY(2px); /* Button pressed effect */
-        }
+    nav {
+      text-align: center;
+      padding: 1rem;
+      background-color: #181818;
+      animation: fadeIn 1.2s ease-out;
+    }
 
-        /* Animation on load */
-        .container {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
+    nav a {
+      color: var(--text-color);
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+    .lang-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-color);
+      border: none;
+      color: black;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 100;
+    }
+
+    section {
+      padding: 2rem 4rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .project {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: #121212;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    a {
+      color: var(--accent-color);
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Apakah kamu sudah memiliki cowo baru?</h1>
-        <button onclick="window.location.href = 'halaman1.html';">Sudah Punya Cowo Baru?</button>
-        <button onclick="window.location.href = 'halaman2.html';">Apakah Saya Boleh Balikan Seperti Dulu Lagi?</button>
+  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
+
+  <header>
+    <h1 data-id="title"><i class="fas fa-user icon"></i>Halo, Saya Nama Anda</h1>
+    <p data-id="subtitle">Web Developer | Desainer | Freelancer</p>
+  </header>
+
+  <nav>
+    <a href="#tentang" data-id="nav-about"><i class="fas fa-info-circle icon"></i><span>Tentang</span></a>
+    <a href="#portofolio" data-id="nav-portfolio"><i class="fas fa-briefcase icon"></i><span>Portofolio</span></a>
+    <a href="#kontak" data-id="nav-contact"><i class="fas fa-envelope icon"></i><span>Kontak</span></a>
+  </nav>
+
+  <section id="tentang">
+    <h2 data-id="about-title">Tentang Saya</h2>
+    <p data-id="about-desc">Saya adalah seorang pengembang web yang berdedikasi, memiliki keahlian dalam HTML, CSS, JavaScript, dan framework modern.</p>
+  </section>
+
+  <section id="portofolio">
+    <h2 data-id="portfolio-title">Proyek Terbaru</h2>
+    <div class="project">
+      <h3 data-id="proj1-title"><i class="fas fa-shopping-cart icon"></i>Website Toko Online</h3>
+      <p data-id="proj1-desc">Website e-commerce sederhana menggunakan HTML, CSS, dan JavaScript.</p>
     </div>
+    <div class="project">
+      <h3 data-id="proj2-title"><i class="fas fa-blog icon"></i>Blog Pribadi</h3>
+      <p data-id="proj2-desc">Sebuah blog responsif untuk menampilkan tulisan saya tentang pemrograman.</p>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2 data-id="contact-title">Kontak</h2>
+    <p><i class="fas fa-envelope icon"></i>Email: nama@email.com</p>
+    <p><i class="fab fa-linkedin icon"></i>LinkedIn: <a href="https://linkedin.com/in/nama" target="_blank">linkedin.com/in/nama</a></p>
+  </section>
+
+  <footer>
+    <p data-id="footer">&copy; 2025 Nama Anda. Semua hak dilindungi.</p>
+  </footer>
+
+  <script>
+    const texts = {
+      id: {
+        title: "<i class=\"fas fa-user icon\"></i>Halo, Saya Nama Anda",
+        subtitle: "Web Developer | Desainer | Freelancer",
+        "nav-about": "<i class=\"fas fa-info-circle icon\"></i>Tentang",
+        "nav-portfolio": "<i class=\"fas fa-briefcase icon\"></i>Portofolio",
+        "nav-contact": "<i class=\"fas fa-envelope icon\"></i>Kontak",
+        "about-title": "Tentang Saya",
+        "about-desc": "Saya adalah seorang pengembang web yang berdedikasi, memiliki keahlian dalam HTML, CSS, JavaScript, dan framework modern.",
+        "portfolio-title": "Proyek Terbaru",
+        "proj1-title": "<i class=\"fas fa-shopping-cart icon\"></i>Website Toko Online",
+        "proj1-desc": "Website e-commerce sederhana menggunakan HTML, CSS, dan JavaScript.",
+        "proj2-title": "<i class=\"fas fa-blog icon\"></i>Blog Pribadi",
+        "proj2-desc": "Sebuah blog responsif untuk menampilkan tulisan saya tentang pemrograman.",
+        "contact-title": "Kontak",
+        footer: "&copy; 2025 Nama Anda. Semua hak dilindungi."
+      },
+      en: {
+        title: "<i class=\"fas fa-user icon\"></i>Hi, I'm Your Name",
+        subtitle: "Web Developer | Designer | Freelancer",
+        "nav-about": "<i class=\"fas fa-info-circle icon\"></i>About",
+        "nav-portfolio": "<i class=\"fas fa-briefcase icon\"></i>Portfolio",
+        "nav-contact": "<i class=\"fas fa-envelope icon\"></i>Contact",
+        "about-title": "About Me",
+        "about-desc": "I am a dedicated web developer skilled in HTML, CSS, JavaScript, and modern frameworks.",
+        "portfolio-title": "Latest Projects",
+        "proj1-title": "<i class=\"fas fa-shopping-cart icon\"></i>Online Store Website",
+        "proj1-desc": "A simple e-commerce site built with HTML, CSS, and JavaScript.",
+        "proj2-title": "<i class=\"fas fa-blog icon\"></i>Personal Blog",
+        "proj2-desc": "A responsive blog to showcase my writing about programming.",
+        "contact-title": "Contact",
+        footer: "&copy; 2025 Your Name. All rights reserved."
+      }
+    };
+
+    let currentLang = "id";
+
+    function toggleLanguage() {
+      currentLang = currentLang === "id" ? "en" : "id";
+      document.querySelector(".lang-toggle").innerText = currentLang === "id" ? "EN" : "ID";
+
+      for (const key in texts[currentLang]) {
+        const el = document.querySelector(`[data-id="${key}"]`);
+        if (el) el.innerHTML = texts[currentLang][key];
+      }
+    }
+  </script>
 </body>
 </html>
