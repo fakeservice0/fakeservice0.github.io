@@ -1,204 +1,121 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portofolio | Portfolio</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login & Register</title>
   <style>
-    :root {
-      --bg-color: #1e1e1e;
-      --text-color: #f0f0f0;
-      --accent-color: #00bcd4;
-      --card-bg: #2c2c2c;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
     }
-
-    * {
+    .container {
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #aaa;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
       box-sizing: border-box;
     }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: all 0.3s ease;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: #121212;
-      animation: fadeInDown 1s ease-out;
-    }
-
-    nav {
-      text-align: center;
-      padding: 1rem;
-      background-color: #181818;
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    nav a {
-      color: var(--text-color);
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .lang-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: var(--accent-color);
+    button {
+      width: 100%;
+      padding: 10px;
+      background: royalblue;
+      color: white;
       border: none;
-      color: black;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
       border-radius: 5px;
-      z-index: 100;
+      cursor: pointer;
     }
-
-    section {
-      padding: 2rem 4rem;
-      animation: fadeInUp 1s ease;
-    }
-
-    .project {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-5px);
-    }
-
-    footer {
-      background-color: #121212;
+    .switch {
+      margin-top: 10px;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      animation: fadeInUp 1s ease;
+      font-size: 14px;
     }
-
-    a {
-      color: var(--accent-color);
+    .switch a {
+      color: royalblue;
+      cursor: pointer;
     }
-
-    .icon {
-      margin-right: 0.5rem;
-      color: var(--accent-color);
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .message {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <button class="lang-toggle" onclick="toggleLanguage()">EN</button>
 
-  <header>
-    <h1 data-id="title"><i class="fas fa-user icon"></i>Halo, Saya Nama Anda</h1>
-    <p data-id="subtitle">Web Developer | Desainer | Freelancer</p>
-  </header>
+<div class="container">
+  <h2 id="form-title">Login</h2>
+  <div class="message" id="message"></div>
+  <input type="text" id="username" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="handleSubmit()">Login</button>
+  <div class="switch">
+    Belum punya akun? <a onclick="switchForm()">Register</a>
+  </div>
+</div>
 
-  <nav>
-    <a href="#tentang" data-id="nav-about"><i class="fas fa-info-circle icon"></i><span>Tentang</span></a>
-    <a href="#portofolio" data-id="nav-portfolio"><i class="fas fa-briefcase icon"></i><span>Portofolio</span></a>
-    <a href="#kontak" data-id="nav-contact"><i class="fas fa-envelope icon"></i><span>Kontak</span></a>
-  </nav>
+<script>
+  let isLogin = true;
 
-  <section id="tentang">
-    <h2 data-id="about-title">Tentang Saya</h2>
-    <p data-id="about-desc">Saya adalah seorang pengembang web yang berdedikasi, memiliki keahlian dalam HTML, CSS, JavaScript, dan framework modern.</p>
-  </section>
+  function switchForm() {
+    isLogin = !isLogin;
+    document.getElementById('form-title').innerText = isLogin ? 'Login' : 'Register';
+    document.querySelector('button').innerText = isLogin ? 'Login' : 'Register';
+    document.querySelector('.switch').innerHTML = isLogin
+      ? 'Belum punya akun? <a onclick="switchForm()">Register</a>'
+      : 'Sudah punya akun? <a onclick="switchForm()">Login</a>';
+    document.getElementById('message').innerText = '';
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+  }
 
-  <section id="portofolio">
-    <h2 data-id="portfolio-title">Proyek Terbaru</h2>
-    <div class="project">
-      <h3 data-id="proj1-title"><i class="fas fa-shopping-cart icon"></i>Website Toko Online</h3>
-      <p data-id="proj1-desc">Website e-commerce sederhana menggunakan HTML, CSS, dan JavaScript.</p>
-    </div>
-    <div class="project">
-      <h3 data-id="proj2-title"><i class="fas fa-blog icon"></i>Blog Pribadi</h3>
-      <p data-id="proj2-desc">Sebuah blog responsif untuk menampilkan tulisan saya tentang pemrograman.</p>
-    </div>
-  </section>
+  function handleSubmit() {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const msg = document.getElementById('message');
 
-  <section id="kontak">
-    <h2 data-id="contact-title">Kontak</h2>
-    <p><i class="fas fa-envelope icon"></i>Email: nama@email.com</p>
-    <p><i class="fab fa-linkedin icon"></i>LinkedIn: <a href="https://linkedin.com/in/nama" target="_blank">linkedin.com/in/nama</a></p>
-  </section>
+    if (!user || !pass) {
+      msg.innerText = 'Username dan password wajib diisi!';
+      return;
+    }
 
-  <footer>
-    <p data-id="footer">&copy; 2025 Nama Anda. Semua hak dilindungi.</p>
-  </footer>
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
 
-  <script>
-    const texts = {
-      id: {
-        title: "<i class=\"fas fa-user icon\"></i>Halo, Saya Nama Anda",
-        subtitle: "Web Developer | Desainer | Freelancer",
-        "nav-about": "<i class=\"fas fa-info-circle icon\"></i>Tentang",
-        "nav-portfolio": "<i class=\"fas fa-briefcase icon\"></i>Portofolio",
-        "nav-contact": "<i class=\"fas fa-envelope icon\"></i>Kontak",
-        "about-title": "Tentang Saya",
-        "about-desc": "Saya adalah seorang pengembang web yang berdedikasi, memiliki keahlian dalam HTML, CSS, JavaScript, dan framework modern.",
-        "portfolio-title": "Proyek Terbaru",
-        "proj1-title": "<i class=\"fas fa-shopping-cart icon\"></i>Website Toko Online",
-        "proj1-desc": "Website e-commerce sederhana menggunakan HTML, CSS, dan JavaScript.",
-        "proj2-title": "<i class=\"fas fa-blog icon\"></i>Blog Pribadi",
-        "proj2-desc": "Sebuah blog responsif untuk menampilkan tulisan saya tentang pemrograman.",
-        "contact-title": "Kontak",
-        footer: "&copy; 2025 Nama Anda. Semua hak dilindungi."
-      },
-      en: {
-        title: "<i class=\"fas fa-user icon\"></i>Hi, I'm Your Name",
-        subtitle: "Web Developer | Designer | Freelancer",
-        "nav-about": "<i class=\"fas fa-info-circle icon\"></i>About",
-        "nav-portfolio": "<i class=\"fas fa-briefcase icon\"></i>Portfolio",
-        "nav-contact": "<i class=\"fas fa-envelope icon\"></i>Contact",
-        "about-title": "About Me",
-        "about-desc": "I am a dedicated web developer skilled in HTML, CSS, JavaScript, and modern frameworks.",
-        "portfolio-title": "Latest Projects",
-        "proj1-title": "<i class=\"fas fa-shopping-cart icon\"></i>Online Store Website",
-        "proj1-desc": "A simple e-commerce site built with HTML, CSS, and JavaScript.",
-        "proj2-title": "<i class=\"fas fa-blog icon\"></i>Personal Blog",
-        "proj2-desc": "A responsive blog to showcase my writing about programming.",
-        "contact-title": "Contact",
-        footer: "&copy; 2025 Your Name. All rights reserved."
+    if (isLogin) {
+      if (users[user] && users[user] === pass) {
+        msg.style.color = 'green';
+        msg.innerText = 'Login berhasil!';
+        // Di sini bisa arahkan ke halaman lain: window.location.href = 'home.html'
+      } else {
+        msg.innerText = 'Login gagal. Cek username atau password.';
       }
-    };
-
-    let currentLang = "id";
-
-    function toggleLanguage() {
-      currentLang = currentLang === "id" ? "en" : "id";
-      document.querySelector(".lang-toggle").innerText = currentLang === "id" ? "EN" : "ID";
-
-      for (const key in texts[currentLang]) {
-        const el = document.querySelector(`[data-id="${key}"]`);
-        if (el) el.innerHTML = texts[currentLang][key];
+    } else {
+      if (users[user]) {
+        msg.innerText = 'Username sudah terdaftar.';
+      } else {
+        users[user] = pass;
+        localStorage.setItem('users', JSON.stringify(users));
+        msg.style.color = 'green';
+        msg.innerText = 'Registrasi berhasil! Silakan login.';
+        switchForm();
       }
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
