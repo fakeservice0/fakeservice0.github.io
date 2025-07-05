@@ -37,22 +37,26 @@
     <p class="text-lg mb-2">Halo, <span id="nama-user" class="font-semibold">Pengguna</span></p>
     <p class="text-sm text-gray-500 mb-6">IP Anda: <span id="ip-user">Mendeteksi...</span></p>
 
-    <!-- Tombol SAMBUNGKAN WIFI -->
     <button onclick="playMusic()" id="connectBtn" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-300 shadow-md hover:shadow-lg">
       SAMBUNGKAN WIFI
     </button>
 
-    <audio id="bg-music" src="1.mp3" preload="auto"></audio>
+    <audio id="bg-music" src="music.mp3" preload="auto"></audio>
 
     <p class="mt-8 text-sm text-gray-400">Terima kasih telah menggunakan WiFi gratis kami.</p>
   </div>
 
   <script>
+    // CEK LOGIN: Jika belum login, redirect ke login.html
+    const userName = localStorage.getItem("wifiUser");
+    if (!userName) {
+      window.location.href = "login.html";
+    }
+
     // Tampilkan nama user
-    const userName = localStorage.getItem("wifiUser") || "Pengguna";
     document.getElementById("nama-user").innerText = userName;
 
-    // Tampilkan IP lokal user
+    // Deteksi IP Lokal (WebRTC)
     async function getLocalIP() {
       const rtc = new RTCPeerConnection({ iceServers: [] });
       rtc.createDataChannel('');
@@ -70,7 +74,7 @@
     }
     getLocalIP();
 
-    // Fungsi untuk memainkan musik saat tombol ditekan
+    // Tombol sambungkan dan putar musik
     function playMusic() {
       const audio = document.getElementById("bg-music");
       audio.play().then(() => {
@@ -78,9 +82,9 @@
         document.getElementById("connectBtn").disabled = true;
         document.getElementById("connectBtn").classList.add("bg-gray-500", "hover:bg-gray-500");
       }).catch(() => {
-        alert("Browser memblokir pemutaran otomatis. Coba izinkan suara.");
+        alert("Browser memblokir suara otomatis. Silakan izinkan suara.");
       });
     }
   </script>
 </body>
-</html>
+</html> 
