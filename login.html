@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free WiFi Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeSlide {
+      animation: fadeSlide 0.8s ease-out forwards;
+    }
+
+    input::placeholder {
+      color: #94a3b8;
+    }
+
+    body {
+      background: linear-gradient(to right, #0f172a, #1e293b);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4 text-white">
+
+  <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl animate-fadeSlide text-gray-800">
+    <h2 class="text-3xl font-bold text-center mb-6">Login Free WiFi</h2>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label for="username" class="block mb-1 text-sm font-medium text-gray-700">Nama Anda</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Contoh: Andi"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+      >
+        Continue
+      </button>
+    </form>
+    <p class="mt-6 text-center text-sm text-gray-500">Akses WiFi Gratis &mdash; powered by YourNetwork</p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('username').value.trim();
+      if (name !== "") {
+        localStorage.setItem("wifiUser", name);
+        window.location.href = "index.html";
+      } else {
+        alert("Nama tidak boleh kosong!");
+      }
+    });
+  </script>
+</body>
+        </html>
